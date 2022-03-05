@@ -1,5 +1,6 @@
 import React from "react";
-import { useFormik } from "formik";
+import { useFormik, Field, Formik, Form, ErrorMessage } from "formik";
+import Container from 'react-bootstrap/Container';
 
 function App() {
   const formik = useFormik({
@@ -20,38 +21,47 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <div>Email:</div>
-        <input
-          id="emailField"
-          type="text"
-          name="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        {formik.errors.email ? (
-          <div id="emailError" style={{ color: "red" }}>
-            {formik.errors.email}
-          </div>
+      <main>
+      <Container>
+        <Formik>
+          <Form onSubmit={handleSubmit} >
+        <label htmlFor="emailField">Email:</label>
+            <Field 
+            id="emailField"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={formik.values.email}
+            />
+        {errors.email && touched.email ? (
+          <p>
+            {errors.email}
+          </p>
         ) : null}
-        <div>Password:</div>
-        <input
+        <ErrorMessage name="email" />
+        <label htmlFor="pswField">Password:</label>
+          <Field
           id="pswField"
-          type="text"
+          type="password"
           name="password"
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        <br />
-        {formik.errors.password ? (
-          <div id="pswError" style={{ color: "red" }}>
-            {formik.errors.password}
-          </div>
+        {errors.password && touched.password ? (
+          <p>
+            {errors.password}
+          </p>
         ) : null}
+        <ErrorMessage name="password" />
         <button id="submitBtn" type="submit">
           Submit
         </button>
-      </form>
+      </Form>
+        </Formik>
+          </Container>
+        </main>
+          <footer>
+          </footer>
     </div>
   );
 }
