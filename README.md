@@ -1,4 +1,4 @@
-# Shopping Cart
+# Formik Project
 
 Description of Project: 
 This project utilizes Formik to setup a form with create-react-app 
